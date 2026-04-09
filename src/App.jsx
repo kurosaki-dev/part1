@@ -22,10 +22,26 @@ const App = () => {
     setVotes(copy);
   }
 
+  // function to get the index of the anecdote with most votes
+  function getMostVotes() {
+    let maxVotes = 0;
+    let indexOfMaxVotes = 0;
+
+    for (let i = 0; i < votes.length; i++) {
+      if (votes[i] > maxVotes) {
+        maxVotes = votes[i];
+        indexOfMaxVotes = i;
+      }
+    }
+
+    return indexOfMaxVotes;
+  }
+
   // for checking votes array
   console.log(votes);
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       {anecdotes[selected]}
       <p>
         has {votes[selected]} {votes[selected] === 1 ? "votes" : "vote"}
@@ -39,6 +55,15 @@ const App = () => {
         >
           next anecdote
         </button>
+      </div>
+
+      <div>
+        <h2>Anecdote with most votes</h2>
+        {anecdotes[getMostVotes()]}
+        <p>
+          has {votes[getMostVotes()]}{" "}
+          {votes[getMostVotes()] === 1 ? "vote" : "votes"}
+        </p>
       </div>
     </div>
   );
